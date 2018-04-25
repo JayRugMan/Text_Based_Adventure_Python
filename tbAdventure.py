@@ -1,5 +1,5 @@
 #!/bin/python
-# Version 1.0 - baseline
+# Version 1.1 - Structure
 
 import os
 import random
