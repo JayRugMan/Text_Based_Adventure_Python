@@ -136,7 +136,9 @@ no arguments taken or returned
 depends on imported os
 """
 def display_map():
+    
     os.system('cls' if os.name == 'nt' else 'clear')
+    
     print(
 """                 === MAP of my house ===
 
@@ -164,11 +166,15 @@ returns the new direction
 no external dependancies
 """
 def turning_left(int_old_direction, list_directions):
+    
     end_of_list = len(list_directions) - 1
+    
     if int_old_direction == 0:
         new_direction = end_of_list
+    
     else:
         new_direction = int_old_direction - 1
+    
     return new_direction
 
 
@@ -178,13 +184,16 @@ returns the new direction
 no external dependancies
 """
 def turning_right(int_old_direction, list_directions):
+    
     end_of_list = len(list_directions) - 1
+    
     if int_old_direction < end_of_list:
         new_direction = int_old_direction + 1
-        return new_direction
+    
     else:
         new_direction = 0
-        return new_direction
+        
+    return new_direction
 
 
 """ moves you to a new room
@@ -194,36 +203,51 @@ This is manually configured based on the structure and
 layout of the house defined in build_house()
 """
 def change_rooms(int_old_room, int_facing_which_direction):
+    
     # if you were in the foyer
     if int_old_room == 0:
+        
         if int_facing_which_direction == 0: # and if you are facing north
             new_room = 5 # you will enter the bathroom
+        
         elif int_facing_which_direction == 3: # and if you are facing west
             new_room = 1 # you will enter the parlor
+    
     # if you are in the parlor
     elif int_old_room == 1:
+        
         if int_facing_which_direction == 1: # and if you are facing east
             new_room = 0 # you will enter the foyer
+        
         elif int_facing_which_direction == 0: # and if you are facing north
             new_room = 4 # you will enter the kitchen
+    
     # if you are in the study
     elif int_old_room == 2:
         new_room = 3 # you will enter the master bedroom
+    
     # if you are in the master bedroom
     elif int_old_room == 3:
+        
         if int_facing_which_direction == 1: # and if you are facing east
             new_room = 4 # you will enter the kitchen
+        
         elif int_facing_which_direction == 2: # and if you are facing south 
             new_room = 2 # you will enter the study
+    
     # if you are in the kitchen
     elif int_old_room == 4:
+        
         if int_facing_which_direction == 2: # and if you are facing south
             new_room = 1 # you will enter the parlor
+        
         elif int_facing_which_direction == 3: # and if you are facing west
             new_room = 3 # you will enter the master bedroom
+    
     # if you are in the bathroom
     elif int_old_room == 5:
         new_room = 0 # you will enter the foyer
+    
     return new_room
 
 
@@ -250,6 +274,7 @@ def main():
     won = False
     
     while(user_input != 'q'):
+        
         os.system('cls' if os.name == 'nt' else 'clear')
         
         main_display(room_names, in_which_room, 
@@ -354,9 +379,12 @@ def main():
             facing_which_direction]]
     
     
+    
     os.system('cls' if os.name == 'nt' else 'clear')
+    
     if won:
         print("\n\tCongradulations!!\n\tSpend it on charity, will ya?!\n")
+    
     else:
         print('\n\tSmell you later!\n')
   
