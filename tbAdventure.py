@@ -4,6 +4,8 @@
 - created a main function
 - added comments to each function
 - appended each functions input arguments with argument type
+- added needed white space
+- reduced line size
 """
 
 import os
