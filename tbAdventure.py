@@ -12,11 +12,10 @@ import os
 import random
 
 
-""" Generates and returnes a random password
-takes no arguments
-returns a random password from a list of passwords
-depends on imported random
-"""
+# Generates and returnes a random password
+# takes no arguments
+# returns a random password from a list of passwords
+# depends on imported random
 def random_password():
     password_list = ['sandman', 'Lockhead', 'Babling brooK', 
                     'Santa Claus', 'Peanut', 'fury flurry', 
@@ -28,11 +27,10 @@ def random_password():
     return pw
 
 
-""" Takes user input and compares it to argument entered
-takes "password"
-returns true or false
-depends on imported os
-"""
+# Takes user input and compares it to argument entered
+# takes "password"
+# returns true or false
+# depends on imported os
 def password_challenge(pw):
     
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -46,13 +44,12 @@ def password_challenge(pw):
         return False
 
 
-""" Generates each room, with a dictionary for each wall of the room
-also creates the password and writes it on the wall
-takes in no arguments
-returns dictionary house, with defined rooms
-returns room_names
-depends on random_password()
-"""
+# Generates each room, with a dictionary for each wall of the room
+# also creates the password and writes it on the wall
+# takes in no arguments
+# returns dictionary house, with defined rooms
+# returns room_names
+# depends on random_password()
 def build_house():
     password = random_password()
     
@@ -96,15 +93,14 @@ def build_house():
     return house, room_names
 
 
-""" Displays the main screen
-takes arguments to display:
-  current room - room_names
-  the direction you're facing - in_which_room
-  What is straight ahead - directions
-  and the current feedback - facing_which_direction
-returns nothing other than screen output - what_you_see
-no dependancies - feedback
-"""
+# Displays the main screen
+# takes arguments to display:
+#   current room - room_names
+#   the direction you're facing - in_which_room
+#   What is straight ahead - directions
+#   and the current feedback - facing_which_direction
+# returns nothing other than screen output - what_you_see
+# no dependancies - feedback
 def main_display(
         list_room_names, int_in_which_room, 
         list_directions, int_facing_which_direction, 
@@ -133,10 +129,9 @@ q = quit
     str_feedback))
 
 
-""" Clears the screen and displays map until enter is pressed
-no arguments taken or returned
-depends on imported os
-"""
+# Clears the screen and displays map until enter is pressed
+# no arguments taken or returned
+# depends on imported os
 def display_map():
     
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -162,11 +157,10 @@ T |                |                |                 | T
     raw_input("\t      hit ENTER once you're done")
 
     
-""" changes directions left, or minuses from int_old_direction
-takes arguments for old direction and directions list
-returns the new direction
-no external dependancies
-"""
+# changes directions left, or minuses from int_old_direction
+# takes arguments for old direction and directions list
+# returns the new direction
+# no external dependancies
 def turning_left(int_old_direction, list_directions):
     
     end_of_list = len(list_directions) - 1
@@ -180,11 +174,10 @@ def turning_left(int_old_direction, list_directions):
     return new_direction
 
 
-""" changes directions right, or adds to int_old_direction
-takes arguments for old direction and directions list
-returns the new direction
-no external dependancies
-"""
+# changes directions right, or adds to int_old_direction
+# takes arguments for old direction and directions list
+# returns the new direction
+# no external dependancies
 def turning_right(int_old_direction, list_directions):
     
     end_of_list = len(list_directions) - 1
@@ -198,12 +191,11 @@ def turning_right(int_old_direction, list_directions):
     return new_direction
 
 
-""" moves you to a new room
-takes interger argument for old room and direction
-returns new room
-This is manually configured based on the structure and 
-layout of the house defined in build_house()
-"""
+# moves you to a new room
+# takes interger argument for old room and direction
+# returns new room
+# This is manually configured based on the structure and 
+# layout of the house defined in build_house()
 def change_rooms(int_old_room, int_facing_which_direction):
     
     # if you were in the foyer
@@ -286,33 +278,30 @@ def main():
         user_input = raw_input(': ')
         user_input = user_input.lower()
         
-        """the fucntion to turn left is called 
-        if you choose to turn left
-        returns a new direction
-        """
+        # the fucntion to turn left is called 
+        # if you choose to turn left
+        # returns a new direction
         if user_input == 'l':
             facing_which_direction = turning_left(
                 facing_which_direction, directions)
         
-        """ the function to turn right is called 
-        if you choose to turn right
-        returns a new direction
-        """
+        # the function to turn right is called 
+        # if you choose to turn right
+        # returns a new direction
         elif user_input == 'r':
             facing_which_direction = turning_right(
                 facing_which_direction, directions)
         
-        """ if you choose to go forward, 
-        a door must be open to change rooms
-        returns:
-          new room
-          feedback
-          whether or not you won
-          new direction
-          new values for house dictionary keys
-          new password
-          user input if q
-        """
+        # if you choose to go forward, 
+        # a door must be open to change rooms
+        # returns:
+        #   new room
+        #   feedback
+        #   whether or not you won
+        #   new direction
+        #   new values for house dictionary keys
+        #   new password
+        #   user input if q
         elif user_input == 'f':
             
             # if the door is open, you change rooms
@@ -320,37 +309,32 @@ def main():
                 in_which_room = change_rooms(
                     in_which_room, facing_which_direction)
                 
-                """ if you make it into room 5 (bathroom), 
-                you win and can only go into room 1 and exit
-                your direction also changes to south
-                """
+                # if you make it into room 5 (bathroom), 
+                # you win and can only go into room 1 and exit
+                # your direction also changes to south
                 if in_which_room == 5:
                     feedback = 'You get the treasure, now leave in peace.'
                     won = True
                     facing_which_direction = 2
                     house[0]['west'] = 'a closed door'
                 
-                """ if not in room five, feedback is 
-                given that you are in a new room
-                """
+                # if not in room five, feedback is 
+                # given that you are in a new room
                 else:
                     feedback = "You're in a new room"
             
-            """ if the door is locked and you move forward, 
-            you are challenged for a password
-            """
+            # if the door is locked and you move forward, 
+            # you are challenged for a password
             elif what_you_see == 'a locked door':
                 
-                """ if you get the password right, the 
-                locked door becomes an open door
-                """
+                # if you get the password right, the 
+                # locked door becomes an open door
                 if password_challenge(password):
                     feedback = 'You guessed right'
                     house[0]['north'] = 'an open door'
                 
-                """ otherwise, the door stays 
-                locked and the password changes
-                """
+                # otherwise, the door stays 
+                # locked and the password changes
                 else:
                     feedback = 'You guessed wrong. It is written anew.'
                     password = random_password()
@@ -364,9 +348,8 @@ def main():
             elif what_you_see == 'the exit':
                 user_input = 'q'
             
-            """ the door to the parlor - or rest of the 
-            house - closed once you enter the bathroom
-            """
+            # the door to the parlor - or rest of the 
+            # house - closed once you enter the bathroom
             elif what_you_see == 'a closed door':
                 feedback = 'You have your treasure, please leave.'
             
