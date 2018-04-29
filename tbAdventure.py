@@ -17,6 +17,7 @@
 - moved function comments from outside the function to within
 - randomized the initial direction and room
 - made forward a function to clean up main
+- modified the turn function to include feedback
 """
 
 import os
@@ -241,14 +242,15 @@ def turning(str_user_input, int_old_direction, list_directions):
             new_direction = end_of_list
         else:
             new_direction = int_old_direction - 1
-        return new_direction # one less number, or to the left
     
     elif str_user_input == 'r':
         if int_old_direction < end_of_list:
             new_direction = int_old_direction + 1
         else:
             new_direction = 0
-        return new_direction # one more number, or to the right
+
+    str_feedback = 'take a look around'
+    return new_direction, str_feedback
 
         
 # Function for moving forward
@@ -409,7 +411,7 @@ def main():
         
         if user_input == 'l' or user_input == 'r':
             # the fucntion to turn is called 
-            facing_which_direction = turning(
+            facing_which_direction, feedback = turning(
                 user_input, facing_which_direction, 
                 directions)
         
